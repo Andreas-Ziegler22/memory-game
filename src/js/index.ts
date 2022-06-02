@@ -1,4 +1,3 @@
-import { cardOriginal } from "./card";
+import { cards } from "./card";
 
-console.log(cardOriginal);
-console.log(cardOriginal[0] === cardOriginal[1]);
+console.log(cards);

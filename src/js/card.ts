@@ -47,9 +47,23 @@ const uniqueCards: Card[] = [
 ];
 const cardOriginal: Card[] = [];
 
+function shuffleNumber(min: number, max: number) {
+  let n = Math.random() * (max - min + 1) + min;
+  return parseInt(n.toString());
+}
+
 uniqueCards.forEach((card, i) => {
   cardOriginal.push({ ...card });
   cardOriginal.push({ ...card });
 });
+const cards: Card[] = [];
 
-export { cardOriginal };
+const range = cardOriginal.length;
+
+while (cards.length < range) {
+  let shuffled = shuffleNumber(0, cardOriginal.length - 1);
+  const item = cardOriginal.splice(shuffled, 1);
+  cards.push(item[0]);
+}
+
+export { cards };
