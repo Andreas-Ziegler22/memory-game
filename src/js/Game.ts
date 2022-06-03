@@ -12,22 +12,34 @@ export class Game {
     this.firstCard = null;
     this.secondCard = null;
   }
+  setCorrectAttempt() {
+    this.firstCard = null;
+    this.secondCard = null;
+  }
 
   addListeners() {
     Array.from(this.dom.querySelectorAll("[data-card]")).forEach((card, i) => {
       card.addEventListener("click", (e) => {
+        if (
+          this.firstCard === e.currentTarget ||
+          this.secondCard === e.currentTarget ||
+          (e.currentTarget as HTMLDivElement).classList.contains("show")
+        )
+          return;
         if (!this.firstCard) {
           this.firstCard = e.currentTarget as HTMLDivElement;
           this.firstCard.classList.add("show");
+          console.log("firstCard", this.firstCard);
         } else if (!this.secondCard) {
           this.secondCard = e.currentTarget as HTMLDivElement;
           this.secondCard.classList.add("show");
+          console.log("secondCard", this.secondCard);
 
           if (
             this.firstCard.getAttribute("data-card") ===
             this.secondCard.getAttribute("data-card")
           ) {
-            console.log("score");
+            this.setCorrectAttempt();
           } else {
             setTimeout(this.reset.bind(this), 2000);
           }
